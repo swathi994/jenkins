@@ -6,21 +6,9 @@ pipeline {
   stages {
     stage('Cloning Git') {
       steps {
-        git([url: 'https://github.com/swathi994/jenkins.git', branch: 'master', credentialsId: 'jenkins-user'])
+        git([url: 'https://github.com/swathi994/jenkins.git', branch: 'main'])
        }
     }
-    stage ('Execute tests') {
-      steps{
-       sh ' sudo systemctl status docker'
-      } 
-    }
-     stage('Deploy to k8s'){
-            steps{
-                script{
-                    kubernetesDeploy (configs: 'deploymentservice.yaml',kubeconfigId: 'k8sconfigpwd')
-                    kubernetesDeploy (configs: 'service.yaml',kubeconfigId: 'k8sconfigpwd')
-                }
-            }
-        }
+
   }
 }
